@@ -1,3 +1,6 @@
+using ConsultaCep.Web.Services;
+using ConsultaCep.Web.Services.IServices;
+
 namespace ConsultaCep.Web
 {
     public class Program
@@ -8,6 +11,11 @@ namespace ConsultaCep.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddHttpClient<IContaService, ContaService>(c =>
+            {
+                c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ConsultaCepAPI"]);
+            });
 
             var app = builder.Build();
 

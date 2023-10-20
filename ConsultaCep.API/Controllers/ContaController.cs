@@ -31,7 +31,7 @@ namespace ConsultaCep.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Conta conta)
+        public ActionResult Create([FromBody] Conta conta)
         {
             if (conta == null) return BadRequest();
             
@@ -41,7 +41,7 @@ namespace ConsultaCep.API.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update(Conta conta)
+        public ActionResult Update([FromBody] Conta conta)
         {
             if (conta == null) return BadRequest();
             var result = _contaRepostitory.Update(conta);

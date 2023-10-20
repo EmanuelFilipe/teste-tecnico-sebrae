@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ConsultaCep.Web.Models.ContaModel>
+@{
+    ViewData["Title"] = "Listagem de Contas ";
+}
+
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Listagem de Contas </h1>
+        </div>
+        <div class="col text-end pt-3">
+            <a asp-action="Create" class="btn btn-outline-primary">
+                <i class="fas fa-plus"></i> Criar Nova Conta
+            </a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Descricao</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-success" title="Alterar Conta">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" title="Remover Conta">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
