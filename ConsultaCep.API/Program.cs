@@ -1,5 +1,3 @@
-using AutoMapper;
-using ConsultaCep.DataAccess.Config;
 using ConsultaCep.DataAccess.Data;
 using ConsultaCep.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +17,6 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Configuração do AutoMapper
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IContaRepostitory, ContaRepository>();
 

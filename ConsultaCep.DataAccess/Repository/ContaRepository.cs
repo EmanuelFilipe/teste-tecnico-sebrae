@@ -1,60 +1,53 @@
-﻿using AutoMapper;
-using ConsultaCep.DataAccess.Data;
-using ConsultaCep.DataAccess.Data.DTO;
+﻿using ConsultaCep.DataAccess.Data;
 using ConsultaCep.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace ConsultaCep.DataAccess.Repository
 {
     public class ContaRepository : IContaRepostitory
     {
         private readonly ApplicationDbContext _context;
-        private IMapper _mapper;
 
-        public ContaRepository(ApplicationDbContext context, IMapper mapper)
+        public ContaRepository(ApplicationDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public IEnumerable<ContaDTO> GetAll()
+        public IList<Conta> GetAll()
         {
-            List<Conta> contas =  _context.Contas.AsNoTracking().ToList();
-            return _mapper.Map<List<ContaDTO>>(contas);
+            return _context.Contas.ToList();
         }
 
-        public async Task<ContaDTO> FindById(long id)
+        public Conta FindById(long id)
         {
-            var conta = await _context.Contas.FindAsync(id); //.Where(c => c.Id == id).AsNoTracking().FirstOrDefaultAsync();
-            return _mapper.Map<ContaDTO>(conta);
+            return _context.Contas.Find(id);
         }
 
-        public async Task<ContaDTO> Create(ContaDTO dto)
+        public Conta Create(Conta conta)
         {
-            Conta conta = _mapper.Map<Conta>(dto);
             _context.Add(conta);
-            await _context.SaveChangesAsync();
-            return _mapper.Map<ContaDTO>(conta);
+            _context.SaveChanges();
+
+            return conta;
         }
 
-        public async Task<ContaDTO> Update(ContaDTO dto)
+        public Conta Update(Conta conta)
         {
-            Conta conta = _mapper.Map<Conta>(dto);
             _context.Update(conta);
-            await _context.SaveChangesAsync();
-            return _mapper.Map<ContaDTO>(conta);
+            _context.SaveChanges();
+
+            return conta;
         }
 
-        public async Task<bool> Delete(long id)
+        public bool Delete(long id)
         {
             try
             {
-                var conta = await _context.Contas.Where(c => c.Id == id).FirstOrDefaultAsync();
+                var conta = FindById(id);
 
                 if (conta == null) return false;
 
                 _context.Remove(conta);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 return true;
             }

@@ -1,12 +1,5 @@
-﻿using ConsultaCep.DataAccess.Data.DTO;
-using ConsultaCep.DataAccess.Repository;
+﻿using ConsultaCep.DataAccess.Repository;
 using ConsultaCep.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ConsultaCep.DataAccess.Handler
 {
@@ -19,17 +12,17 @@ namespace ConsultaCep.DataAccess.Handler
             _contaRepostitory = contaRepostitory;
         }
 
-        public void Add(ContaDTO model)
+        public void Add(Conta model)
         {
-            _contaRepostitory.Create(model);
+           _contaRepostitory.Create(model);
         }
 
-        public async Task Update(ContaDTO dto)
+        public void Update(Conta dto)
         {
-            await _contaRepostitory.Update(dto);
+            _contaRepostitory.Update(dto);
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             _contaRepostitory.Delete(id);
         }

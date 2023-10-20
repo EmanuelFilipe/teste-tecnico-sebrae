@@ -1,20 +1,14 @@
-﻿using ConsultaCep.DataAccess.Data.DTO;
-using ConsultaCep.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsultaCep.Models;
 
 namespace ConsultaCep.DataAccess.Repository
 {
     public interface IContaRepostitory
     {
-        IEnumerable<ContaDTO> GetAll();
-        Task<ContaDTO> FindById(long id);
-        Task<ContaDTO> Create(ContaDTO dto);
-        Task<ContaDTO> Update(ContaDTO dto);
-        Task<bool> Delete(long id);
+        IList<Conta> GetAll();
+        Conta FindById(long id);
+        Conta Create(Conta dto);
+        Conta Update(Conta dto);
+        bool Delete(long id);
 
     }
 }

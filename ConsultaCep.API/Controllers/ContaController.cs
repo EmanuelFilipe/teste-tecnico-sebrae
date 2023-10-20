@@ -1,5 +1,5 @@
-﻿using ConsultaCep.DataAccess.Data.DTO;
-using ConsultaCep.DataAccess.Repository;
+﻿using ConsultaCep.DataAccess.Repository;
+using ConsultaCep.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConsultaCep.API.Controllers
@@ -16,40 +16,42 @@ namespace ConsultaCep.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ContaDTO>> GetAll()
+        public ActionResult<IEnumerable<Conta>> GetAll()
         {
             var contas = _contaRepostitory.GetAll();
             return Ok(contas);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContaDTO>> FindById(long id)
+        public ActionResult FindById(long id)
         {
-            var conta = await _contaRepostitory.FindById(id);
+            var conta = _contaRepostitory.FindById(id);
             if (conta == null) return NotFound();
             return Ok(conta);
         }
 
         [HttpPost]
-        public async Task<ActionResult<ContaDTO>> Create(ContaDTO dto)
+        public ActionResult Create(Conta conta)
         {
-            if (dto == null) return BadRequest();
-            var conta = await _contaRepostitory.Create(dto);
-            return Ok(conta);
+            if (conta == null) return BadRequest();
+            
+            var result = _contaRepostitory.Create(conta);
+
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<ActionResult<ContaDTO>> Update(ContaDTO dto)
+        public ActionResult Update(Conta conta)
         {
-            if (dto == null) return BadRequest();
-            var conta = await _contaRepostitory.Update(dto);
-            return Ok(conta);
+            if (conta == null) return BadRequest();
+            var result = _contaRepostitory.Update(conta);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(long id)
+        public ActionResult Delete(long id)
         {
-            var status = await _contaRepostitory.Delete(id);
+            var status = _contaRepostitory.Delete(id);
             if (!status) return BadRequest();
             return Ok(status);
         }

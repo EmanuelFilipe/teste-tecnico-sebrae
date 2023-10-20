@@ -1,10 +1,7 @@
-﻿using ConsultaCep.DataAccess.Data.DTO;
-using ConsultaCep.DataAccess.Repository;
-using ConsultaCep.Models;
+﻿using ConsultaCep.Models;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Net;
 
 namespace ConsultaCep.API.Controllers
 {
@@ -21,7 +18,7 @@ namespace ConsultaCep.API.Controllers
 
         [HttpGet("{cep}")]
         [SwaggerOperation(Summary = "Obter um endereço", Description = "Retorna um endereço com base no CEP fornecido.")]
-        public async Task<ActionResult<ContaDTO>> GetAdrress(string cep)
+        public async Task<ActionResult<Conta>> GetAdrress(string cep)
         {
             if (cep.Replace("-", "").Length < 8) return BadRequest("CEP Inválido");
 
