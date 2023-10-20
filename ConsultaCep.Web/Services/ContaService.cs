@@ -1,4 +1,5 @@
-﻿using ConsultaCep.Web.Models;
+﻿using ConsultaCep.DataAccess.Repository;
+using ConsultaCep.Web.Models;
 using ConsultaCep.Web.Services.IServices;
 using ConsultaCep.Web.Utils;
 
@@ -9,6 +10,7 @@ namespace ConsultaCep.Web.Services
         private readonly HttpClient _httpClient;
         public const string BasePath = "api/v1/conta";
 
+
         public ContaService(HttpClient client)
         {
             _httpClient = client ?? throw new ArgumentNullException(nameof(client));
@@ -17,6 +19,7 @@ namespace ConsultaCep.Web.Services
         public async Task<IEnumerable<ContaModel>> GetAll()
         {
             var response = await _httpClient.GetAsync(BasePath);
+            var teste = await response.ReadContentAs<List<ContaModel>>();
             return await response.ReadContentAs<List<ContaModel>>();
         }
 

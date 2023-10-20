@@ -4,7 +4,7 @@
 }
 
 <div class="container p-4 border">
-    <div class="row pb-2">
+    <div class="row pb-3">
         <div class="col">
             <h1 class="text-primary">Listagem de Contas </h1>
         </div>
@@ -28,13 +28,9 @@
                         <td>@item.Nome</td>
                         <td>@item.Descricao</td>
                         <td>
-                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-success" title="Alterar Conta">
-                                <i class="fas fa-edit"></i>
-                            </a>
-
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" title="Remover Conta">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <a asp-action="Detail" class="btn btn-info" asp-route-id="@item.Id" title="Visualizar Conta"><span class="fa fa-search"></span></a>
+                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id" title="Alterar Conta"><span class="fa fa-pencil-alt"></span></a>
+                            <a id="deleteItem" class="deleteItem btn btn-danger" data-bs-target="#basicModal" data-bs-toggle="modal" data-path="@Url.Action("Delete", "Conta", new { id = item.Id })" title="Deletar"><span class="fa fa-trash" /></a>
                         </td>
                     </tr>
                 }
@@ -42,3 +38,10 @@
         </table>
     </div>
 </div>
+
+<partial name="../Shared/_Delete" />
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/deleteItemScript.js"></script>    
+}

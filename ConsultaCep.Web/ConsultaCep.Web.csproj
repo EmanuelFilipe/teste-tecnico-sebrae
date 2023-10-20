@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConsultaCep.DataAccess\ConsultaCep.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
