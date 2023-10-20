@@ -19,8 +19,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IContaRepostitory, ContaRepository>();
+builder.Services.AddScoped<IDataService, DataService>();
 
 var app = builder.Build();
+app.Services.CreateScope().ServiceProvider.GetService<IDataService>().InicializaDB(); ;
+//serviceProvider.GetService<ApplicationDbContext>().Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
