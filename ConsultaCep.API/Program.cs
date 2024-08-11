@@ -20,10 +20,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddScoped<IContaRepostitory, ContaRepository>();
 builder.Services.AddScoped<IDataService, DataService>();
-
+builder.Services.AddCors();
 var app = builder.Build();
-app.Services.CreateScope().ServiceProvider.GetService<IDataService>().InicializaDB(); ;
-//serviceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+app.Services.CreateScope().ServiceProvider.GetService<IDataService>()!.InicializaDB();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -37,5 +36,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.Run();
