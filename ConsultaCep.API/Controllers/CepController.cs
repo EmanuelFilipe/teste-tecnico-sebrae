@@ -22,17 +22,17 @@ namespace ConsultaCep.API.Controllers
         {
             if (cep.Replace("-", "").Length < 8) return BadRequest("CEP Inválido");
 
-            var adrress = CallApiCorreios(cep);
+            var adrress = await CallApiCorreios(cep);
 
             if (adrress == null) return NotFound("CEP não encontrado.");
 
             return Ok(adrress);
         }
 
-        private Endereco? CallApiCorreios(string cep)
+        private async Task<Endereco?> CallApiCorreios(string cep)
         {
             var request = new RestRequest($"{cep}/json", (Method)DataFormat.Json);
-            var response = _client.Get<Endereco>(request);
+            var response = await _client.GetAsync<Endereco>(request);
 
             return response;
         }

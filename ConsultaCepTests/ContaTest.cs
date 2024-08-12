@@ -4,6 +4,7 @@ using ConsultaCep.DataAccess.Repository;
 using ConsultaCep.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Xunit;
 
 namespace ConsultaCepTests
 {
