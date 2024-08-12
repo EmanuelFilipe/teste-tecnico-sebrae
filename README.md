@@ -1,9 +1,9 @@
 **Chalenged-Sebrae** is a full-stack project divided between frontend and backend, developed as part of a technical challenge.
 
-Frontend
+### Frontend
 The frontend is built using Razor, with support from CSS, JavaScript, and Bootstrap to create a modern, responsive, and intuitive user interface.
 
-Backend
+### Backend
 The backend is an API developed in C# 5, following the n-tier architecture and implementing the Repository Pattern. Additionally, the backend includes unit tests to ensure code reliability. The main features include:
 
 Account CRUD: Complete management of create, read, update, and delete operations for accounts.
